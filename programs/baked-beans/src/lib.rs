@@ -8,9 +8,9 @@ pub mod utils;
 
 use instructions::*;
 
-declare_id!("Aye5t8s6DZ2x7rGFyhrxDeDbjCJxvV1v33BfH1Ti1qsJ");
+declare_id!("4VUZQ2Tbx3BM9iq6DBH5fTk4oQ3iNZcC9qoUJUBhyyRs");
 #[program]
-pub mod baked_beans {
+pub mod berry_miner {
     use super::*;
 
     pub fn initialize(ctx: Context<Initialize>, new_authority: Pubkey) -> Result<()> {

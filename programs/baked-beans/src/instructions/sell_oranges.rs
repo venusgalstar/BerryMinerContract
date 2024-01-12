@@ -76,7 +76,7 @@ pub fn handle(ctx: Context<SellOranges>) -> Result<()> {
     let real_val = orange_value.checked_sub(fee).unwrap();
 
     // send fee to treasury
-    let bump = ctx.bumps.get("vault").unwrap();
+    let bump = ctx.bumps.vault;
     invoke_signed(
         &system_instruction::transfer(&accts.vault.key(), &accts.treasury.key(), fee),
         &[
@@ -84,7 +84,7 @@ pub fn handle(ctx: Context<SellOranges>) -> Result<()> {
             accts.treasury.clone(),
             accts.system_program.to_account_info().clone(),
         ],
-        &[&[VAULT_SEED, &[*bump]]],
+        &[&[VAULT_SEED, &[bump]]],
     )?;
     // add vault <- sol_amount - fee
     invoke_signed(
@@ -94,7 +94,7 @@ pub fn handle(ctx: Context<SellOranges>) -> Result<()> {
             accts.user.to_account_info().clone(),
             accts.system_program.to_account_info().clone(),
         ],
-        &[&[VAULT_SEED, &[*bump]]],
+        &[&[VAULT_SEED, &[bump]]],
     )?;
 
     // lamports should be bigger than zero to prevent rent exemption
